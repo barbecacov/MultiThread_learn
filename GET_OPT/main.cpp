@@ -3,8 +3,8 @@
 
 using namespace std;
 
-#define NO_ARG		0
-#define HAS_ARG		1
+#define NO_ARG      0
+#define HAS_ARG     1
 
 static struct option long_options[] = {
 
@@ -17,6 +17,8 @@ static struct option long_options[] = {
 
 static const char* short_options = "mio:";
 
+//usage:
+// my_cc --m model.bin --i gg.jpg --o aa.png
 
 int main(int argc, char **argv)
 {
@@ -41,9 +43,9 @@ int main(int argc, char **argv)
 
             default:
                 return -1;
-            
+
         }
-        
+
     }
 
     return 0;
