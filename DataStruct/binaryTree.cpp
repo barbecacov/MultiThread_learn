@@ -1,6 +1,16 @@
 #include <iostream>
-
+#include <stack>
+#include <vector>
+#include <queue>
 using namespace std;
+
+/*
+        5
+       / \
+      4   6
+     / \   \
+    1   2   0
+*/
 
 struct TreeNode{
     int val;
@@ -9,7 +19,59 @@ struct TreeNode{
     TreeNode(int x) : val(x), left(nullptr), right(nullptr){}
 };
 
-//查找二叉树最大深度
+void preorder_loop(TreeNode* root){
+
+    if (root == nullptr){
+        return;
+    }
+
+    stack<TreeNode*> st;
+    st.push(root);
+    while (st.empty()){
+
+        TreeNode* node = st.top();
+        st.pop();
+
+        cout << node->val << " ";
+        if (node->right != nullptr){
+            st.push(node->right);
+        }
+        if (node->left != nullptr){
+            st.push(node->left);
+        }
+    }
+
+}
+
+
+vector<vector<int>> levelOrder_loop(TreeNode* root){
+
+    queue<TreeNode*> que;
+    if (root == nullptr){
+        return {};
+    }
+    que.push(root);
+    vector<vector<int>> result;
+    while (!que.empty()){
+
+        int size = que.size();
+        vector<int> vec;
+        for (int i = 0; i < size; ++i) {
+
+            TreeNode* node = que.front();
+            que.pop();
+            vec.push_back(node->val);
+            if(node->left) que.push(node->left);
+            if(node->right) que.push(node->right);
+
+        }
+        result.push_back(vec);
+    }
+    return result;
+}
+
+
+
 int maxDepth(TreeNode* root) {
 
     if (root == nullptr){
